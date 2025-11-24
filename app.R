@@ -1,10 +1,11 @@
 # app.R
 library(shiny)
+library(ragg)
 library(tidyverse)
 library(readxl)
 library(gt)
 library(gtExtras)
-library(shinyWidgets)   # pickerInput
+library(shinyWidgets)
 library(htmltools)
 
 ui <- fluidPage(
@@ -534,13 +535,26 @@ server <- function(input, output, session) {
   })
   
   output$download_png <- downloadHandler(
-    filename = function() paste0("tabla_", Sys.Date(), ".png"),
+    filename = function() {
+      paste0(
+        "tabla_",
+        Sys.Date(), 
+        ".png")
+    },
     content = function(file) {
-      gtsave(
-        tabla_reactiva()$gt, 
-        file = file,
-        vwidth = input$png_width, 
-        vheight = input$png_height)
+      
+      # Crear imagen con ragg (funciona en shinyapps.io)
+      ragg::agg_png(
+        filename = file,
+        width = input$png_width,   
+        height = input$png_height, 
+        units = "px",
+        res = 150
+      )
+      # dibujar la tabla GT (imprime el HTML renderizado)
+      print(tabla_reactiva()$gt)
+      
+      dev.off()
     }
   )
   
