@@ -5,6 +5,8 @@ account: hbpjix-ezequiel-flores
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 16151874
-bundleId: 11222295
-url: https://hbpjix-ezequiel-flores.shinyapps.io/shiny_r_tabla_likert/
+bundleId: 11225177
+url: https://ezequielfk.shinyapps.io/shiny_r_tabla_likert/
 version: 1
+asMultiple: FALSE
+asStatic: FALSE
